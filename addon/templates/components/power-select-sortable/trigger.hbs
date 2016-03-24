@@ -1,0 +1,38 @@
+{{#sortable-group tagName="ul"
+  direction="x"
+  model=selected
+  id=(concat elementId "-ember-power-select-multiple-options")
+  class="ember-power-select-multiple-options"
+  onChange=(action "reorderItems") as |group|}}
+  {{#each selected as |item idx|}}
+    {{#sortable-item tagName="li"
+      class="ember-power-select-multiple-option"
+      group=group
+      onDragStart=(action "dragStarted")
+      onDragStop=(action "dragStopped")
+      model=item}}
+      {{#unless disabled}}
+        <span role="button"
+          aria-label="remove element"
+          class="ember-power-select-multiple-remove-btn"
+          data-selected-index={{idx}}>&times;</span>
+      {{/unless}}
+      {{#if selectedItemComponent}}
+        {{component selectedItemComponent selected=item lastSearchedText=lastSearchedText}}
+      {{else}}
+        {{yield item lastSearchedText}}
+      {{/if}}
+    {{/sortable-item}}
+  {{/each}}
+{{/sortable-group}}
+{{#if searchEnabled}}
+  <input type="search" class="ember-power-select-trigger-multiple-input {{elementId}}-input"
+    tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+    aria-controls={{listboxId}}
+    style={{triggerMultipleInputStyle}}
+    placeholder={{maybePlaceholder}}
+    disabled={{disabled}}
+    oninput={{action "handleInput"}}
+    onkeydown={{action "handleKeydown"}}>
+{{/if}}
+<span class="ember-power-select-status-icon"></span>

@@ -4,3 +4,12 @@
 body {
   font-family: helvetica, arial, sans-serif;
 }
+
+.sortable-item {
+  transition: all .125s;
+}
+
+.sortable-item.is-dragging {
+  transition-duration: 0s;
+  z-index: 10;
+}

@@ -3,3 +3,22 @@
 {{#power-select-multiple options=options selected=selected onchange=(action (mut selected)) as |opt|}}
   {{opt}}
 {{/power-select-multiple}}
+
+
+<br>
+<br>
+
+{{#power-select-multiple options=options
+  selected=selected
+  onchange=(action (mut selected))
+  triggerComponent=(component
+    "power-select-sortable/trigger"
+    dragStarted=(action "dragStarted")
+    dragStopped=(action "dragStopped")
+  ) as |opt|}}
+  {{opt}}
+{{/power-select-multiple}}
+
+{{#if showLuke}}
+  <img src="luke.jpg" alt="luke" height="400" >
+{{/if}}
